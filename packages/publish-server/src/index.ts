@@ -1,17 +1,13 @@
-import fs from "fs";
-import path from "path";
 import express from "express";
 
-import user from "./user";
+import middleware from "./middleware";
+import routers from "./routers";
 
 const app = express();
 const port = 8000;
 
-app.use("/user", user);
-
-app.get("/", (req, res) => {
-  fs.writeFileSync(path.join(__dirname, "../tmp/1.html"), "Hello world!");
-  res.send("Hello World!");
+middleware(app).then(() => {
+  routers(app);
 });
 
 app.listen(port, () => {
