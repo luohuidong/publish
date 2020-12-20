@@ -1,8 +1,8 @@
 {
-  "name": "publish-tool",
+  "name": "@luohuidong/publish-tool",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev:build": "tsc --watch",
     "prd:build": "tsc",
