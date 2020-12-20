@@ -12,7 +12,7 @@ router.post("/:filename", (req, res) => {
 
   const headers = req.headers;
 
-  const newRequest = http.request({
+  const options = {
     hostname: "localhost",
     port: 8001,
     path: `/file/${filename}`,
@@ -20,21 +20,34 @@ router.post("/:filename", (req, res) => {
     headers: {
       "Content-Length": headers["content-length"],
     },
+  };
+  const newRequest = http.request(options, (res) => {
+    res.setEncoding("utf8");
+    let chunks = "";
+    res.on("data", (chunk) => {
+      chunks += chunk;
+    });
+    res.on("end", () => {
+      if (res.statusCode !== 200) {
+        console.log("Upload failed", chunks);
+      }
+    });
   });
 
   newRequest.on("error", (err) => {
     if (err) {
-      console.log("err", err);
+      res.status(500).send(err.message);
     }
   });
 
-  req.pipe(newRequest);
-
-  req.on("end", () => {
-    const body = req.body;
-    console.log("🚀 ~ file: index.ts ~ line 15 ~ app.post ~ body", body);
-    newRequest.end();
+  newRequest.on("end", () => {
+    console.log("test");
     res.send("post file finished");
+  });
+
+  req.pipe(newRequest);
+  req.on("end", () => {
+    newRequest.end();
   });
 });
 
