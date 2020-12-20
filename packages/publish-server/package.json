@@ -2,7 +2,7 @@
   "name": "publish-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "dev:build": "tsc --watch",
     "dev:serve": "nodemon --watch dist dist/index.js",
