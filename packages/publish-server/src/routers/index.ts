@@ -3,20 +3,31 @@ import fs from "fs";
 import path from "path";
 
 export default async function (app: express.Application): Promise<void> {
-  const files = fs.readdirSync(path.join(__dirname));
-  const regExp = /\.js$/;
+  const fileBasenames = fs.readdirSync(path.join(__dirname));
+  const jsFileBasenameRegExp = /\.js$/;
+  const filenameRegExp = /(.+)\.js$/;
 
   const promises = [];
 
-  for (let i = 0; i < files.length - 1; i++) {
-    const filename = files[i];
-    if (regExp.test(filename) && filename !== "index.js") {
-      promises.push(import(path.join(__dirname, filename)));
+  for (let i = 0; i < fileBasenames.length - 1; i++) {
+    const fileBasename = fileBasenames[i];
+
+    if (jsFileBasenameRegExp.test(fileBasename) && fileBasename !== "index.js") {
+      const filenameResult = filenameRegExp.exec(fileBasename);
+      if (filenameResult) {
+        const filename = filenameResult[1];
+        const filePath = path.join(__dirname, fileBasename);
+        const promise = import(filePath).then(({ default: router }) => ({
+          path: filename === "root" ? "/" : `/${filename}`,
+          router,
+        }));
+        promises.push(promise);
+      }
     }
   }
 
   const results = await Promise.all(promises);
-  results.forEach(({ default: router }) => {
-    app.use(router);
+  results.forEach(({ path, router }) => {
+    app.use(path, router);
   });
 }
