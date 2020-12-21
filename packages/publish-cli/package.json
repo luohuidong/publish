@@ -1,5 +1,5 @@
 {
-  "name": "@luohuidong/publish-tool",
+  "name": "@luohuidong/publish-cli",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
