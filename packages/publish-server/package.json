@@ -6,7 +6,7 @@
   "scripts": {
     "dev:build": "tsc --watch",
     "dev:serve": "nodemon --watch dist dist/index.js",
-    "build": "tsc",
+    "prd:build": "tsc",
     "lint": "eslint",
     "test": "jest"
   },
