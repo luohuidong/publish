@@ -2036,6 +2036,13 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@types/adm-zip@^0.4.33":
+  version "0.4.33"
+  resolved "https://registry.npm.taobao.org/@types/adm-zip/download/@types/adm-zip-0.4.33.tgz#ea5b94f771443f655613b64f920c0555867200dd"
+  integrity sha1-6luU93FEP2VWE7ZPkgwFVYZyAN0=
+  dependencies:
+    "@types/node" "*"
+
 "@types/archiver@^5.1.0":
   version "5.1.0"
   resolved "https://registry.npm.taobao.org/@types/archiver/download/@types/archiver-5.1.0.tgz#869f4ce4028e49cf9a0243cf914415f4cc3d1f3d"
@@ -2361,6 +2368,11 @@ acorn@^7.1.1, acorn@^7.4.0:
   version "7.4.1"
   resolved "https://registry.npm.taobao.org/acorn/download/acorn-7.4.1.tgz#feaed255973d2e77555b83dbc08851a6c63520fa"
   integrity sha1-/q7SVZc9LndVW4PbwIhRpsY1IPo=
+
+adm-zip@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.npm.taobao.org/adm-zip/download/adm-zip-0.5.1.tgz?cache=0&sync_timestamp=1606467922859&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fadm-zip%2Fdownload%2Fadm-zip-0.5.1.tgz#32e51c6fe88370f4389b424567b78a345e79ebc6"
+  integrity sha1-MuUcb+iDcPQ4m0JFZ7eKNF5568Y=
 
 agent-base@4, agent-base@^4.3.0:
   version "4.3.0"
