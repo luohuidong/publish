@@ -1,15 +1,11 @@
 import express from "express";
 import http from "http";
-import fs from "fs";
-import path from "path";
 
 const router = express.Router({});
 
 router.get("/", (req, res) => {
   res.send("Hello file!");
 });
-
-// router.post("/:filename", (req, res) => {});
 
 router.post("/:filename", (req, res) => {
   const params = req.params;
@@ -34,6 +30,8 @@ router.post("/:filename", (req, res) => {
     newRequestRes.on("end", () => {
       if (newRequestRes.statusCode !== 200) {
         res.status(500).send(JSON.parse(chunks));
+      } else {
+        res.end();
       }
     });
   });
@@ -44,9 +42,8 @@ router.post("/:filename", (req, res) => {
   });
 
   req.pipe(newRequest);
-  req.on("end", () => {
+  req.on("close", () => {
     newRequest.end();
-    res.end();
   });
 });
 
