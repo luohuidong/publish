@@ -72,7 +72,12 @@ export default class UploadFile {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth() + 1;
     const date = currentDate.getDate();
-    const archiveFilePath = path.join(__dirname, "../tmp/", `${year}-${month}-${date}.zip`);
+
+    const archiveFilePath = path.join(
+      __dirname,
+      "../tmp/",
+      `${year}-${month}-${date}-${Date.now()}.zip`
+    );
 
     return new Promise((resolve, reject) => {
       // create a file to stream archive data to.
