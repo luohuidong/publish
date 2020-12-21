@@ -20,6 +20,7 @@ router.post("/:filename", (req, res) => {
     headers: {
       "Content-Length": headers["content-length"],
     },
+    timeout: 5000,
   };
   const newRequest = http.request(options, (newRequestRes) => {
     newRequestRes.setEncoding("utf8");
@@ -37,7 +38,7 @@ router.post("/:filename", (req, res) => {
   });
   newRequest.on("error", (err) => {
     if (err) {
-      res.status(500).send(JSON.parse(err.message));
+      res.status(500).send(err.message);
     }
   });
 

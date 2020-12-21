@@ -29,6 +29,7 @@ export default class UploadFile {
       headers: {
         "Content-Length": states.size,
       },
+      timeout: 5000,
     };
     const request = http.request(options, (res) => {
       res.setEncoding("utf8");
@@ -48,8 +49,9 @@ export default class UploadFile {
     request.on("error", (e) => {
       log(chalk.red(`problem with request: ${e.message}`));
     });
-    request.on("finish", () => {
-      log(chalk.green("Upload file finished."));
+    request.on("timeout", () => {
+      log(chalk.red("上传文件超时"));
+      request.abort();
     });
 
     // 创建可写流读取需要上传的文件
