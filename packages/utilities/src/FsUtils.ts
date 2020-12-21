@@ -74,6 +74,9 @@ export default class FsUtils {
    * @param dirPath
    */
   checkDirPath(dirPath: string): void {
+    if (path.dirname(dirPath) !== dirPath) {
+      throw new Error("当前路径不是目录路径");
+    }
     try {
       fs.accessSync(dirPath);
     } catch (error) {
