@@ -68,4 +68,18 @@ export default class FsUtils {
 
     this._traversalFolder(dir, dir, cb);
   }
+
+  /**
+   * 检查指定目录路径是否存在，如果不存在则创建对应目录
+   * @param dirPath
+   */
+  checkDirPath(dirPath: string): void {
+    try {
+      fs.accessSync(dirPath);
+    } catch (error) {
+      fs.mkdirSync(dirPath, {
+        recursive: true,
+      });
+    }
+  }
 }
