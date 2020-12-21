@@ -54,13 +54,13 @@ export default class UploadFile {
 
     // 创建可写流读取需要上传的文件
     const stream = fs.createReadStream(filePath);
-    stream.pipe(request);
     stream.on("close", () => {
       request.end();
     });
     stream.on("error", (err) => {
       console.log("🚀 ~ file: UploadFile.ts ~ line 62 ~ UploadFile ~ stream.on ~ err", err);
     });
+    stream.pipe(request);
   }
 
   /**
